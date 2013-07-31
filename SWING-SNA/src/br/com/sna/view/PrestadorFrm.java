@@ -34,6 +34,7 @@ public class PrestadorFrm extends javax.swing.JFrame {
         initComponents();
         prestadorImplements = new PrestadorImplements();
         prestadorActionControl = new PrestadorActionControl(this);
+        
     }
 
     private void searchPrestadores() {
@@ -110,7 +111,7 @@ public class PrestadorFrm extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Funcionário");
+        setTitle("Prestador");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
