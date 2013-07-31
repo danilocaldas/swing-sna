@@ -4,9 +4,9 @@
  */
 package br.com.sna.view;
 
-import br.com.sna.control.FuncionarioActionControl;
-import br.com.sna.controller.implement.FuncionarioImplements;
-import br.com.sna.model.Funcionario;
+import br.com.sna.control.PrestadorActionControl;
+import br.com.sna.controller.implement.PrestadorImplements;
+import br.com.sna.model.Prestador;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,54 +19,54 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ritacosta
  */
-public class FuncionarioFrm extends javax.swing.JFrame {
+public class PrestadorFrm extends javax.swing.JFrame {
 
     /**
      * Creates new form Prestador
      */
-    private FuncionarioActionControl funcionarioActionControl;
-    public DefaultTableModel tmFuncionario = new DefaultTableModel(null, new String[]{"Id", "Nome", "Senha"});
-    List<Funcionario> funcionarios;
-    FuncionarioImplements funcionarioImplements;
-    ListSelectionModel lsmFuncionario;
+    private PrestadorActionControl prestadorActionControl;
+    private DefaultTableModel tmPrestador = new DefaultTableModel(null, new String[]{"Id", "Nome", "CNES"});
+    private List<Prestador> prestadores;
+    PrestadorImplements prestadorImplements;
+    private ListSelectionModel lsmPrestador;
 
-    public FuncionarioFrm() {
+    public PrestadorFrm() {
         initComponents();
-        funcionarioImplements = new FuncionarioImplements();
-        funcionarioActionControl = new FuncionarioActionControl(this);
+        prestadorImplements = new PrestadorImplements();
+        prestadorActionControl = new PrestadorActionControl(this);
     }
 
-    private void searchFuncionario() {
-        funcionarios = funcionarioImplements.listaFuncionario();
-        mostrarFuncionarios(funcionarios);
+    private void searchPrestadores() {
+        prestadores = prestadorImplements.listaPrestador();
+        mostrarPrestadores(prestadores);
     }
 
-    private void mostrarFuncionarios(List<Funcionario> funcionarios) {
-        while (tmFuncionario.getRowCount() < 0) {
-            tmFuncionario.removeRow(0);
+    private void mostrarPrestadores(List<Prestador> prestadores) {
+        while (tmPrestador.getRowCount() < 0) {
+            tmPrestador.removeRow(0);
         }
-        if (funcionarios.size() == 0) {
+        if (prestadores.size() == 0) {
             JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro!");
         } else {
             String[] campos = new String[]{null, null, null};
-            for (int i = 0; i < funcionarios.size(); i++) {
-                tmFuncionario.addRow(campos);
-                tmFuncionario.setValueAt(funcionarios.get(i).getId(), i, 0);
-                tmFuncionario.setValueAt(funcionarios.get(i).getNome(), i, 1);
-                tmFuncionario.setValueAt(funcionarios.get(i).getSenha(), i, 2);
+            for (int i = 0; i < prestadores.size(); i++) {
+                tmPrestador.addRow(campos);
+                tmPrestador.setValueAt(prestadores.get(i).getId(), i, 0);
+                tmPrestador.setValueAt(prestadores.get(i).getNome(), i, 1);
+                tmPrestador.setValueAt(prestadores.get(i).getCnes(), i, 2);
             }
         }
     }
     
-    private void tbFuncionarioLinhaSelecionada(JTable tb) {
+    private void tbPrestadorLinhaSelecionada(JTable tb) {
         if (tb.getSelectedRow() != -1) {
-            labelId.setText(String.valueOf(funcionarios.get(tb.getSelectedRow()).getId()));
-            txtNomeFuncionario.setText(funcionarios.get(tb.getSelectedRow()).getNome());
-            ptxtSenhaFuncionario.setText(funcionarios.get(tb.getSelectedRow()).getSenha());
+            labelId.setText(String.valueOf(prestadores.get(tb.getSelectedRow()).getId()));
+            txtNomePrestador.setText(prestadores.get(tb.getSelectedRow()).getNome());
+            ftxtCnes.setText(String.valueOf(prestadores.get(tb.getSelectedRow()).getCnes()));
         } else {
             labelId.setText("");
-            txtNomeFuncionario.setText("");
-            ptxtSenhaFuncionario.setText("");
+            txtNomePrestador.setText("");
+            ftxtCnes.setText("");
         }
     }
     
@@ -85,26 +85,26 @@ public class FuncionarioFrm extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Funcionário = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        btIncluirFuncionario = new javax.swing.JButton();
-        btPrepararAlterarFuncionario = new javax.swing.JButton();
-        btExcluirFuncionario = new javax.swing.JButton();
+        btIncluirPrestador = new javax.swing.JButton();
+        btPrepararAlterarPrestador = new javax.swing.JButton();
+        btExcluirPrestador = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btSalvarFuncionario = new javax.swing.JButton();
-        btAlterar = new javax.swing.JButton();
-        btFinalizarFuncionario = new javax.swing.JButton();
+        btSalvarPrestador = new javax.swing.JButton();
+        btAlterarPrestador = new javax.swing.JButton();
+        btFinalizarPrestador = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelId = new javax.swing.JLabel();
-        txtNomeFuncionario = new javax.swing.JTextField();
-        ptxtSenhaFuncionario = new javax.swing.JPasswordField();
+        txtNomePrestador = new javax.swing.JTextField();
+        ftxtCnes = new javax.swing.JFormattedTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbFuncionario = new javax.swing.JTable();
+        tbPrestador = new javax.swing.JTable();
         jToolBar2 = new javax.swing.JToolBar();
-        btPesquisar = new javax.swing.JButton();
+        btPesquisarPrestador = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -117,7 +117,7 @@ public class FuncionarioFrm extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         Funcionário.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        Funcionário.setText("Funcionário");
+        Funcionário.setText("Prestador");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,51 +138,51 @@ public class FuncionarioFrm extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        btIncluirFuncionario.setText("Incluir");
-        btIncluirFuncionario.setFocusable(false);
-        btIncluirFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btIncluirFuncionario.setMaximumSize(new java.awt.Dimension(60, 35));
-        btIncluirFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btIncluirFuncionario);
+        btIncluirPrestador.setText("Incluir");
+        btIncluirPrestador.setFocusable(false);
+        btIncluirPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btIncluirPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btIncluirPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btIncluirPrestador);
 
-        btPrepararAlterarFuncionario.setText("Modificar");
-        btPrepararAlterarFuncionario.setFocusable(false);
-        btPrepararAlterarFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btPrepararAlterarFuncionario.setMaximumSize(new java.awt.Dimension(60, 35));
-        btPrepararAlterarFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btPrepararAlterarFuncionario);
+        btPrepararAlterarPrestador.setText("Modificar");
+        btPrepararAlterarPrestador.setFocusable(false);
+        btPrepararAlterarPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPrepararAlterarPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btPrepararAlterarPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btPrepararAlterarPrestador);
 
-        btExcluirFuncionario.setText("Excluir");
-        btExcluirFuncionario.setFocusable(false);
-        btExcluirFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btExcluirFuncionario.setMaximumSize(new java.awt.Dimension(60, 35));
-        btExcluirFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btExcluirFuncionario);
+        btExcluirPrestador.setText("Excluir");
+        btExcluirPrestador.setFocusable(false);
+        btExcluirPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btExcluirPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btExcluirPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btExcluirPrestador);
         jToolBar1.add(jSeparator1);
 
-        btSalvarFuncionario.setText("Salvar");
-        btSalvarFuncionario.setEnabled(false);
-        btSalvarFuncionario.setFocusable(false);
-        btSalvarFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btSalvarFuncionario.setMaximumSize(new java.awt.Dimension(60, 35));
-        btSalvarFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btSalvarFuncionario);
+        btSalvarPrestador.setText("Salvar");
+        btSalvarPrestador.setEnabled(false);
+        btSalvarPrestador.setFocusable(false);
+        btSalvarPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSalvarPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btSalvarPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btSalvarPrestador);
 
-        btAlterar.setText("Alterar");
-        btAlterar.setEnabled(false);
-        btAlterar.setFocusable(false);
-        btAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btAlterar.setMaximumSize(new java.awt.Dimension(60, 35));
-        btAlterar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btAlterar);
+        btAlterarPrestador.setText("Alterar");
+        btAlterarPrestador.setEnabled(false);
+        btAlterarPrestador.setFocusable(false);
+        btAlterarPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAlterarPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btAlterarPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btAlterarPrestador);
 
-        btFinalizarFuncionario.setText("Finalizar");
-        btFinalizarFuncionario.setEnabled(false);
-        btFinalizarFuncionario.setFocusable(false);
-        btFinalizarFuncionario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btFinalizarFuncionario.setMaximumSize(new java.awt.Dimension(60, 35));
-        btFinalizarFuncionario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btFinalizarFuncionario);
+        btFinalizarPrestador.setText("Finalizar");
+        btFinalizarPrestador.setEnabled(false);
+        btFinalizarPrestador.setFocusable(false);
+        btFinalizarPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btFinalizarPrestador.setMaximumSize(new java.awt.Dimension(60, 35));
+        btFinalizarPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btFinalizarPrestador);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -190,13 +190,13 @@ public class FuncionarioFrm extends javax.swing.JFrame {
 
         jLabel3.setText("Nome:");
 
-        jLabel4.setText("Senha:");
+        jLabel4.setText("Cnes:");
 
         jLabel2.setText("Id:");
 
-        txtNomeFuncionario.setEnabled(false);
+        txtNomePrestador.setEnabled(false);
 
-        ptxtSenhaFuncionario.setEnabled(false);
+        ftxtCnes.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -210,11 +210,11 @@ public class FuncionarioFrm extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNomeFuncionario)
-                    .addComponent(ptxtSenhaFuncionario)
+                    .addComponent(txtNomePrestador)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 120, Short.MAX_VALUE)))
+                        .addGap(0, 120, Short.MAX_VALUE))
+                    .addComponent(ftxtCnes))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -226,12 +226,12 @@ public class FuncionarioFrm extends javax.swing.JFrame {
                     .addComponent(labelId, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNomeFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(ptxtSenhaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ftxtCnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -254,17 +254,17 @@ public class FuncionarioFrm extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        tbFuncionario.setModel(tmFuncionario);
-        tbFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        lsmFuncionario = tbFuncionario.getSelectionModel();
-        lsmFuncionario.addListSelectionListener(new ListSelectionListener() {
+        tbPrestador.setModel(tmPrestador);
+        tbPrestador.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lsmPrestador = tbPrestador.getSelectionModel();
+        lsmPrestador.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if(! e.getValueIsAdjusting()){
-                    tbFuncionarioLinhaSelecionada(tbFuncionario);
+                    tbPrestadorLinhaSelecionada(tbPrestador);
                 }
             }
         });
-        jScrollPane1.setViewportView(tbFuncionario);
+        jScrollPane1.setViewportView(tbPrestador);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -285,17 +285,17 @@ public class FuncionarioFrm extends javax.swing.JFrame {
 
         jToolBar2.setRollover(true);
 
-        btPesquisar.setText("Listar Funcionarios");
-        btPesquisar.setFocusable(false);
-        btPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btPesquisar.setMaximumSize(new java.awt.Dimension(120, 35));
-        btPesquisar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        btPesquisarPrestador.setText("Listar Prestadores");
+        btPesquisarPrestador.setFocusable(false);
+        btPesquisarPrestador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPesquisarPrestador.setMaximumSize(new java.awt.Dimension(120, 35));
+        btPesquisarPrestador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPesquisarPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPesquisarActionPerformed(evt);
+                btPesquisarPrestadorActionPerformed(evt);
             }
         });
-        jToolBar2.add(btPesquisar);
+        jToolBar2.add(btPesquisarPrestador);
 
         btLimpar.setText("Limpar");
         btLimpar.setFocusable(false);
@@ -349,9 +349,9 @@ public class FuncionarioFrm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
-        searchFuncionario();
-    }//GEN-LAST:event_btPesquisarActionPerformed
+    private void btPesquisarPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarPrestadorActionPerformed
+        searchPrestadores();
+    }//GEN-LAST:event_btPesquisarPrestadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,33 +370,34 @@ public class FuncionarioFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FuncionarioFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestadorFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FuncionarioFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestadorFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FuncionarioFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestadorFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FuncionarioFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestadorFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FuncionarioFrm().setVisible(true);
+                new PrestadorFrm().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Funcionário;
-    private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btExcluirFuncionario;
-    private javax.swing.JButton btFinalizarFuncionario;
-    private javax.swing.JButton btIncluirFuncionario;
+    private javax.swing.JButton btAlterarPrestador;
+    private javax.swing.JButton btExcluirPrestador;
+    private javax.swing.JButton btFinalizarPrestador;
+    private javax.swing.JButton btIncluirPrestador;
     private javax.swing.JButton btLimpar;
-    private javax.swing.JButton btPesquisar;
-    private javax.swing.JButton btPrepararAlterarFuncionario;
-    private javax.swing.JButton btSalvarFuncionario;
+    private javax.swing.JButton btPesquisarPrestador;
+    private javax.swing.JButton btPrepararAlterarPrestador;
+    private javax.swing.JButton btSalvarPrestador;
+    private javax.swing.JFormattedTextField ftxtCnes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -411,49 +412,112 @@ public class FuncionarioFrm extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel labelId;
-    private javax.swing.JPasswordField ptxtSenhaFuncionario;
-    private javax.swing.JTable tbFuncionario;
-    private javax.swing.JTextField txtNomeFuncionario;
+    private javax.swing.JTable tbPrestador;
+    private javax.swing.JTextField txtNomePrestador;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JButton getBtAlterarFuncionario() {
-        return btPrepararAlterarFuncionario;
+    public DefaultTableModel getTmPrestador() {
+        return tmPrestador;
     }
 
-    public void setBtAlterarFuncionario(javax.swing.JButton btAlterarFuncionario) {
-        this.btPrepararAlterarFuncionario = btAlterarFuncionario;
+    public void setTmPrestador(DefaultTableModel tmPrestador) {
+        this.tmPrestador = tmPrestador;
     }
 
-    public javax.swing.JButton getBtExcluirFuncionario() {
-        return btExcluirFuncionario;
+    public List<Prestador> getPrestadores() {
+        return prestadores;
     }
 
-    public void setBtExcluirFuncionario(javax.swing.JButton btExcluirFuncionario) {
-        this.btExcluirFuncionario = btExcluirFuncionario;
+    public void setPrestadores(List<Prestador> prestadores) {
+        this.prestadores = prestadores;
     }
 
-    public javax.swing.JButton getBtFinalizarFuncionario() {
-        return btFinalizarFuncionario;
+    public ListSelectionModel getLsmPrestador() {
+        return lsmPrestador;
     }
 
-    public void setBtFinalizarFuncionario(javax.swing.JButton btFinalizarFuncionario) {
-        this.btFinalizarFuncionario = btFinalizarFuncionario;
+    public void setLsmPrestador(ListSelectionModel lsmPrestador) {
+        this.lsmPrestador = lsmPrestador;
     }
 
-    public javax.swing.JButton getBtIncluirFuncionario() {
-        return btIncluirFuncionario;
+    public javax.swing.JTable getTbPrestador() {
+        return tbPrestador;
     }
 
-    public void setBtIncluirFuncionario(javax.swing.JButton btIncluirFuncionario) {
-        this.btIncluirFuncionario = btIncluirFuncionario;
+    public void setTbPrestador(javax.swing.JTable tbPrestador) {
+        this.tbPrestador = tbPrestador;
     }
 
-    public javax.swing.JButton getBtSalvarFuncionario() {
-        return btSalvarFuncionario;
+    public javax.swing.JButton getBtAlterarPrestador() {
+        return btAlterarPrestador;
     }
 
-    public void setBtSalvarFuncionario(javax.swing.JButton btSalvarFuncionario) {
-        this.btSalvarFuncionario = btSalvarFuncionario;
+    public void setBtAlterarPrestador(javax.swing.JButton btAlterarPrestador) {
+        this.btAlterarPrestador = btAlterarPrestador;
+    }
+
+    public javax.swing.JButton getBtExcluirPrestador() {
+        return btExcluirPrestador;
+    }
+
+    public void setBtExcluirPrestador(javax.swing.JButton btExcluirPrestador) {
+        this.btExcluirPrestador = btExcluirPrestador;
+    }
+
+    public javax.swing.JButton getBtFinalizarPrestador() {
+        return btFinalizarPrestador;
+    }
+
+    public void setBtFinalizarPrestador(javax.swing.JButton btFinalizarPrestador) {
+        this.btFinalizarPrestador = btFinalizarPrestador;
+    }
+
+    public javax.swing.JButton getBtIncluirPrestador() {
+        return btIncluirPrestador;
+    }
+
+    public void setBtIncluirPrestador(javax.swing.JButton btIncluirPrestador) {
+        this.btIncluirPrestador = btIncluirPrestador;
+    }
+
+    public javax.swing.JButton getBtLimpar() {
+        return btLimpar;
+    }
+
+    public void setBtLimpar(javax.swing.JButton btLimpar) {
+        this.btLimpar = btLimpar;
+    }
+
+    public javax.swing.JButton getBtPesquisarPrestador() {
+        return btPesquisarPrestador;
+    }
+
+    public void setBtPesquisarPrestador(javax.swing.JButton btPesquisarPrestador) {
+        this.btPesquisarPrestador = btPesquisarPrestador;
+    }
+
+    public javax.swing.JButton getBtPrepararAlterarPrestador() {
+        return btPrepararAlterarPrestador;
+    }
+
+    public void setBtPrepararAlterarPrestador(javax.swing.JButton btPrepararAlterarPrestador) {
+        this.btPrepararAlterarPrestador = btPrepararAlterarPrestador;
+    }
+
+    public javax.swing.JButton getBtSalvarPrestador() {
+        return btSalvarPrestador;
+    }
+
+    public void setBtSalvarPrestador(javax.swing.JButton btSalvarPrestador) {
+        this.btSalvarPrestador = btSalvarPrestador;
+    }
+
+    public javax.swing.JFormattedTextField getFtxtCnes() {
+        return ftxtCnes;
+    }
+
+    public void setFtxtCnes(javax.swing.JFormattedTextField ftxtCnes) {
+        this.ftxtCnes = ftxtCnes;
     }
 
     public javax.swing.JLabel getLabelId() {
@@ -464,61 +528,15 @@ public class FuncionarioFrm extends javax.swing.JFrame {
         this.labelId = labelId;
     }
 
-    public javax.swing.JPasswordField getPtxtSenhaFuncionario() {
-        return ptxtSenhaFuncionario;
+    public javax.swing.JTextField getTxtNomePrestador() {
+        return txtNomePrestador;
     }
 
-    public void setPtxtSenhaFuncionario(javax.swing.JPasswordField ptxtSenhaFuncionario) {
-        this.ptxtSenhaFuncionario = ptxtSenhaFuncionario;
+    public void setTxtNomePrestador(javax.swing.JTextField txtNomePrestador) {
+        this.txtNomePrestador = txtNomePrestador;
     }
 
-    public javax.swing.JTable getTbFuncionario() {
-        return tbFuncionario;
-    }
-
-    public void setTbFuncionario(javax.swing.JTable tbFuncionario) {
-        this.tbFuncionario = tbFuncionario;
-    }
-
-    public javax.swing.JTextField getTxtNomeFuncionario() {
-        return txtNomeFuncionario;
-    }
-
-    public void setTxtNomeFuncionario(javax.swing.JTextField txtNomeFuncionario) {
-        this.txtNomeFuncionario = txtNomeFuncionario;
-    }
-
-    public javax.swing.JButton getBtPesquisar() {
-        return btPesquisar;
-    }
-
-    public void setBtPesquisar(javax.swing.JButton btPesquisar) {
-        this.btPesquisar = btPesquisar;
-    }
-
-    public javax.swing.JButton getBtAlterar() {
-        return btAlterar;
-    }
-
-    public void setBtAlterar(javax.swing.JButton btAlterar) {
-        this.btAlterar = btAlterar;
-    }
-
-    public javax.swing.JButton getBtPrepararAlterarFuncionario() {
-        return btPrepararAlterarFuncionario;
-    }
-
-    public void setBtPrepararAlterarFuncionario(javax.swing.JButton btPrepararAlterarFuncionario) {
-        this.btPrepararAlterarFuncionario = btPrepararAlterarFuncionario;
-    }
-
-    public javax.swing.JButton getBtLimpar() {
-        return btLimpar;
-    }
-
-    public void setBtLimpar(javax.swing.JButton btLimpar) {
-        this.btLimpar = btLimpar;
-    }
+    
     
     
 }
